@@ -1,5 +1,14 @@
 <?php
 
+require_once(get_template_directory() . '/son/actions.php');
+
+add_action( 'init', 'son_script_function' );
+
+function son_script_function() {
+	wp_register_script( "son_liker_script", get_template_directory_uri() . '/son/script.js', array('jquery') );
+	wp_enqueue_script( 'son_liker_script' );
+}
+
 /**
  * Twenty Seventeen functions and definitions
  *

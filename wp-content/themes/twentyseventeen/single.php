@@ -23,6 +23,16 @@ get_header(); ?>
 
 				get_template_part( 'template-parts/post/content', get_post_format() );
 
+				$likes = get_post_meta($post->ID, "likes", true);
+				$likes = ($likes == "") ? 0 : $likes;
+
+				?>
+					Este post tem <span id='number_of_likes'><?php echo $likes ?></span> curtidas<br>
+				<?php
+
+				$nonce = wp_create_nonce("son_user_like_nonce");
+				echo '<a class="user_like_button" data-nonce="' . $nonce . '" data-post_id="' . $post->ID . '" href="#">Curtir</a>';
+
 				// If comments are open or we have at least one comment, load up the comment template.
 				if ( comments_open() || get_comments_number() ) :
 					comments_template();
